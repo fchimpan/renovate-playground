@@ -1,9 +1,9 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
+  extends: [
     "config:recommended"
   ],
-  "customManagers": [
+  customManagers: [
     {
       "customType": "regex",
       "fileMatch": ["^Dockerfile$"],
@@ -15,5 +15,17 @@
       "versioningTemplate": "python",
       "depNameTemplate": "python"
     }
+  ],
+  packageRules: [
+    // .tool-versions の python と Dockerfile の PYTHON_VERSION をまとめる
+    {
+      groupName: "python",
+      matchManagers: ["python"],
+      matchDepNames: ["python"],
+    },
+    {
+      groupName: "python",
+      matchFilePatterns: ["^Dockerfile$"],
+    },
   ]
 }
